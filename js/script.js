@@ -1,4 +1,17 @@
 // ============================
+// 스플래시 스크린 애니메이션
+// ============================
+window.addEventListener('DOMContentLoaded', () => {
+    const splashScreen = document.getElementById('splashScreen');
+    if (splashScreen) {
+        // 2.5초 후 스플래시 스크린 제거
+        setTimeout(() => {
+            splashScreen.style.pointerEvents = 'none';
+        }, 2500);
+    }
+});
+
+// ============================
 // 네비게이션 메뉴 토글
 // ============================
 const hamburger = document.getElementById('hamburger');
@@ -67,6 +80,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // 로드 시간 표시 (선택사항)
     console.log('Living-AiT 웹사이트가 성공적으로 로드되었습니다.');
+});
+
+// ============================
+// Projects Flow 스크롤 애니메이션
+// ============================
+const flowStepObserverOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const flowStepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            flowStepObserver.unobserve(entry.target);
+        }
+    });
+}, flowStepObserverOptions);
+
+document.querySelectorAll('.flow-step').forEach(step => {
+    flowStepObserver.observe(step);
 });
 
 // ============================
